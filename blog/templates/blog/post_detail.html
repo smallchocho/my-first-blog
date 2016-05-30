@@ -3,11 +3,14 @@
     {% block content %}
         <div class="post">
             {% if post.published_date %}
+            <!--這個是用來檢查post.published_date不是空的-->
                 <div class="date">
                     {{ post.published_date }}
+                    {% if user.is_authenticated %}
+                        <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                    {% endif %}
                 </div>
             {% endif %}
-            <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
             <h1>{{ post.title }}</h1>
             <p>{{ post.text|linebreaks }}</p>
         </div>
